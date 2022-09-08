@@ -103,6 +103,24 @@ func validateAuthOrProxyServices(cfg *Config) error {
 		if haveAuthServers && cfg.Databases.Enabled {
 			return trace.BadParameter("config: when db_service is enabled, proxy_address must be specified instead of auth_server")
 		}
+
+		if haveProxyAddress {
+			port := cfg.ProxyAddress.Port(defaults.HTTPListenPort)
+			if port == defaults.AuthListenPort {
+				cfg.Log.Warnf("config: your proxy_address is pointing to port %d, have you specified your auth server instead?", defaults.AuthListenPort)
+			}
+		}
+
+		if haveAuthServers {
+			authServerPort := cfg.authServers[0].Port(defaults.AuthListenPort)
+			checkPorts := []int{defaults.HTTPListenPort, 443}
+			for _, port := range checkPorts {
+				if authServerPort == port {
+					cfg.Log.Warnf("config: your auth_server is pointing to port %d, have you specified your proxy address instead?", port)
+				}
+			}
+		}
+
 		return nil
 	}
 
