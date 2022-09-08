@@ -28,7 +28,6 @@ import (
 	"strings"
 
 	"github.com/gravitational/teleport"
-	apiutils "github.com/gravitational/teleport/api/utils"
 	"github.com/gravitational/teleport/lib/config"
 	dbconfigurators "github.com/gravitational/teleport/lib/configurators/databases"
 	"github.com/gravitational/teleport/lib/defaults"
@@ -497,12 +496,7 @@ func checkConfigurationFileVersion(version string) error {
 		return nil
 	}
 
-	hasVersion := apiutils.SliceContainsStr(defaults.TeleportVersions, version)
-	if !hasVersion {
-		return trace.BadParameter("config: version must be one of %s", strings.Join(defaults.TeleportVersions, ", "))
-	}
-
-	return nil
+	return service.ValidateVersion(version)
 }
 
 // onConfigDump is the handler for "configure" CLI command

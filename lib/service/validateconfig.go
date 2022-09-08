@@ -32,7 +32,7 @@ import (
 func validateConfig(cfg *Config) error {
 	applyDefaults(cfg)
 
-	if err := validateVersion(cfg); err != nil {
+	if err := ValidateVersion(cfg.Version); err != nil {
 		return err
 	}
 
@@ -135,8 +135,8 @@ func validateAuthOrProxyServices(cfg *Config) error {
 	return nil
 }
 
-func validateVersion(cfg *Config) error {
-	hasVersion := utils.SliceContainsStr(defaults.TeleportVersions, cfg.Version)
+func ValidateVersion(version string) error {
+	hasVersion := utils.SliceContainsStr(defaults.TeleportVersions, version)
 	if !hasVersion {
 		return trace.BadParameter("config: version must be one of %s", strings.Join(defaults.TeleportVersions, ", "))
 	}
