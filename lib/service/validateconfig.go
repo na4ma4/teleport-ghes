@@ -133,8 +133,6 @@ func validateAuthOrProxyServices(cfg *Config) error {
 	return nil
 }
 
-
-
 func verifyEnabledService(cfg *Config) error {
 	enabled := []bool{
 		cfg.Auth.Enabled,
