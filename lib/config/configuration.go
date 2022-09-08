@@ -481,7 +481,7 @@ func applyAuthOrProxyAddress(fc *FileConfig, cfg *service.Config) error {
 			}
 
 			if err != nil {
-				return trace.Errorf("cannot parse auth server address: '%v'", fc.AuthServer)
+				return trace.BadParameter("cannot parse auth server address: '%v'", fc.AuthServer)
 			}
 
 			cfg.SetAuthServerAddresses([]utils.NetAddr{*addr})
@@ -494,7 +494,7 @@ func applyAuthOrProxyAddress(fc *FileConfig, cfg *service.Config) error {
 			}
 
 			if err != nil {
-				return trace.Errorf("cannot parse proxy address: '%v'", fc.ProxyAddress)
+				return trace.BadParameter("cannot parse proxy address: '%v'", fc.ProxyAddress)
 			}
 
 			cfg.ProxyAddress = *addr
