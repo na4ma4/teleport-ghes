@@ -1062,8 +1062,7 @@ func (process *TeleportProcess) newClient(authServers []utils.NetAddr, proxyAddr
 
 		tunnelClient, err := process.newClientThroughTunnel([]utils.NetAddr{proxyAddress}, tlsConfig, sshClientConfig)
 		if err != nil {
-			logger.WithError(err).Debug("Failed to connect to Proxy Server through tunnel.")
-			return nil, trace.Errorf("Failed to connect to Proxy Server through tunnel, no methods remaining.")
+			return nil, trace.Errorf("Failed to connect to Proxy Server through tunnel.")
 		}
 
 		logger.Debug("Connected to Proxy Server through tunnel.")
