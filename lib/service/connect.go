@@ -1040,10 +1040,12 @@ func (process *TeleportProcess) rotate(conn *Connector, localState auth.StateV2,
 	}
 }
 
-// newClient attempts to connect directly to the Auth Server. If it fails, it
-// falls back to trying to connect to the Auth Server through the proxy.
-// The proxy address might be configured in process environment as apidefaults.TunnelPublicAddrEnvar
-// in which case, no attempt at discovering the reverse tunnel address is made.
+// newClient attempts to tunnel to either the proxy server or auth server
+// When a proxy server is specified (config v3 onwards), it will only attempt to tunnel to the proxy
+// and will error if the connection fails.
+// When only auth servers are specified (config v1 and v2 can have multiple auth servers, v3 only allows one)
+// It will attempt to direct dial the auth server, and fallback to trying to tunnel connect to the
+// Auth Server through the proxy.
 func (process *TeleportProcess) newClient(authServers []utils.NetAddr, proxyAddress utils.NetAddr, identity *auth.Identity) (*auth.Client, error) {
 	tlsConfig, err := identity.TLSConfig(process.Config.CipherSuites)
 	if err != nil {
