@@ -27,6 +27,7 @@ import (
 
 	"github.com/gravitational/teleport"
 	"github.com/gravitational/teleport/api/defaults"
+	apiutils "github.com/gravitational/teleport/api/utils"
 	"github.com/gravitational/teleport/lib/limiter"
 	"github.com/gravitational/teleport/lib/utils"
 	"github.com/jonboulle/clockwork"
@@ -811,6 +812,15 @@ var TeleportVersions = []string{
 	TeleportConfigVersionV1,
 	TeleportConfigVersionV2,
 	TeleportConfigVersionV3,
+}
+
+func ValidateVersion(version string) error {
+	hasVersion := apiutils.SliceContainsStr(TeleportVersions, version)
+	if !hasVersion {
+		return trace.BadParameter("version must be one of %s", strings.Join(TeleportVersions, ", "))
+	}
+
+	return nil
 }
 
 // Default values for tsh and tctl commands.

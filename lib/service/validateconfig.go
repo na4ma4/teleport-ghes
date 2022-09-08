@@ -18,10 +18,8 @@ package service
 
 import (
 	"io"
-	"strings"
 
 	"github.com/gravitational/teleport/api/types"
-	"github.com/gravitational/teleport/api/utils"
 	"github.com/gravitational/teleport/lib/defaults"
 	"github.com/gravitational/teleport/lib/services"
 	"github.com/gravitational/trace"
@@ -32,7 +30,7 @@ import (
 func validateConfig(cfg *Config) error {
 	applyDefaults(cfg)
 
-	if err := ValidateVersion(cfg.Version); err != nil {
+	if err := defaults.ValidateVersion(cfg.Version); err != nil {
 		return err
 	}
 
@@ -135,14 +133,7 @@ func validateAuthOrProxyServices(cfg *Config) error {
 	return nil
 }
 
-func ValidateVersion(version string) error {
-	hasVersion := utils.SliceContainsStr(defaults.TeleportVersions, version)
-	if !hasVersion {
-		return trace.BadParameter("config: version must be one of %s", strings.Join(defaults.TeleportVersions, ", "))
-	}
 
-	return nil
-}
 
 func verifyEnabledService(cfg *Config) error {
 	enabled := []bool{
