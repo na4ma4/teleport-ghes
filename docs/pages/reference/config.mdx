@@ -121,12 +121,12 @@ teleport:
     diag_addr: "127.0.0.1:3000"
 
 
-    # Only use one of auth_server or proxy_address.
+    # Only use one of auth_server or proxy_server.
     #
     # When you have either the application service or database service enabled,
-    # only tunneling through the proxy is supported, so you should specify proxy_address.
+    # only tunneling through the proxy is supported, so you should specify proxy_server.
     # All other services support both tunneling through the proxy and directly connecting
-    # to the auth server, so you can specify either auth_server or proxy_address.
+    # to the auth server, so you can specify either auth_server or proxy_server.
 
     # Auth Server address and port to connect to. If you enable the Teleport
     # Auth Server to run in High Availability configuration, the address should
@@ -137,7 +137,7 @@ teleport:
     # Proxy Server address and port to connect to. If you enable the Teleport
     # Proxy Server to run in High Availability configuration, the address should
     # point to a Load Balancer.
-    proxy_address: teleport-proxy.example.com:443
+    proxy_server: teleport-proxy.example.com:443
 
     # cache:
     #  # The cache is enabled by default, it can be disabled with this flag

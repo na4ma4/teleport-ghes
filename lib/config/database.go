@@ -42,7 +42,7 @@ version: v3
 teleport:
   nodename: {{ .NodeName }}
   data_dir: {{ .DataDir }}
-  proxy_address: {{ .ProxyAddress }}
+  proxy_server: {{ .ProxyServer }}
   join_params: 
     join_method: token
     token_name: {{ .AuthToken }}

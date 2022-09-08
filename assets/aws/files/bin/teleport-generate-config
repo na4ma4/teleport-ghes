@@ -350,7 +350,7 @@ EOF
     if [[ "${USE_ACM}" != "true" ]]; then
         write_https_keypairs_section
     fi
-    
+
     # set up the database listeners
     write_database_section TELEPORT_DOMAIN_NAME
 
@@ -391,7 +391,7 @@ teleport:
   storage:
     type: dir
     path: /var/lib/teleport/backend
-  proxy_address: ${TELEPORT_DOMAIN_NAME}:443
+  proxy_server: ${TELEPORT_DOMAIN_NAME}:443
 
 auth_service:
   enabled: no
@@ -510,7 +510,7 @@ EOF
 
             # set up the database listeners
             write_database_section TELEPORT_EXTERNAL_HOSTNAME
-    
+
             # set up the kubernetes listener
             write_kubernetes_section TELEPORT_EXTERNAL_HOSTNAME
 
@@ -531,7 +531,7 @@ EOF
 
         # set up the database listeners
         write_database_section TELEPORT_EXTERNAL_HOSTNAME
-            
+
         # set up the kubernetes listener
         write_kubernetes_section TELEPORT_EXTERNAL_HOSTNAME
 
@@ -592,7 +592,7 @@ EOF
 
     # write ssh/tunnel config
     write_ssh_and_tunnel_section 3080
-    
+
     # set up the database listeners
     write_database_section TELEPORT_EXTERNAL_HOSTNAME
 
@@ -780,7 +780,7 @@ teleport:
   join_params:
     join_method: token
     token_name: ${TELEPORT_JOIN_TOKEN}
-  proxy_address: ${TELEPORT_PROXY_SERVER_LB}
+  proxy_server: ${TELEPORT_PROXY_SERVER_LB}
 
 auth_service:
   enabled: no

@@ -464,14 +464,14 @@ func applyAuthOrProxyAddress(fc *FileConfig, cfg *service.Config) error {
 			return trace.BadParameter("auth_server is supported from config version v3 onwards")
 		}
 
-		if fc.ProxyAddress != "" {
-			return trace.BadParameter("proxy_address is supported from config version v3 onwards")
+		if fc.ProxyServer != "" {
+			return trace.BadParameter("proxy_server is supported from config version v3 onwards")
 		}
 
-	// From v3 onwards, either auth_server or proxy_address should be set
+	// From v3 onwards, either auth_server or proxy_server should be set
 	case defaults.TeleportConfigVersionV3:
 		if len(fc.AuthServers) > 0 {
-			return trace.BadParameter("config version v3 requires the use of auth_server or proxy_address")
+			return trace.BadParameter("config version v3 requires the use of auth_server or proxy_server")
 		}
 
 		if fc.AuthServer != "" {
@@ -487,17 +487,17 @@ func applyAuthOrProxyAddress(fc *FileConfig, cfg *service.Config) error {
 			cfg.SetAuthServerAddresses([]utils.NetAddr{*addr})
 		}
 
-		if fc.ProxyAddress != "" {
-			addr, err := utils.ParseHostPortAddr(fc.ProxyAddress, defaults.HTTPListenPort)
+		if fc.ProxyServer != "" {
+			addr, err := utils.ParseHostPortAddr(fc.ProxyServer, defaults.HTTPListenPort)
 			if err != nil {
 				return trace.Wrap(err)
 			}
 
 			if err != nil {
-				return trace.BadParameter("cannot parse proxy address: '%v'", fc.ProxyAddress)
+				return trace.BadParameter("cannot parse proxy address: '%v'", fc.ProxyServer)
 			}
 
-			cfg.ProxyAddress = *addr
+			cfg.ProxyServer = *addr
 		}
 	}
 

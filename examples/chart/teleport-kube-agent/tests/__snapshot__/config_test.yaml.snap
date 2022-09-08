@@ -8,7 +8,7 @@ does not generate a config for clusterrole.yaml:
           join_params:
             join_method: token
             token_name: "/etc/teleport-secrets/auth-token"
-          proxy_address: proxy.example.com:3080
+          proxy_server: proxy.example.com:3080
           log:
             severity: INFO
             output: stderr
@@ -46,7 +46,7 @@ does not generate a config for pdb.yaml:
           join_params:
             join_method: token
             token_name: "/etc/teleport-secrets/auth-token"
-          proxy_address: proxy.example.com:3080
+          proxy_server: proxy.example.com:3080
           log:
             severity: INFO
             output: stderr
@@ -84,7 +84,7 @@ matches snapshot and tests for annotations.yaml:
           join_params:
             join_method: token
             token_name: "/etc/teleport-secrets/auth-token"
-          proxy_address: proxy.example.com:3080
+          proxy_server: proxy.example.com:3080
           log:
             severity: INFO
             output: stderr
@@ -125,7 +125,7 @@ matches snapshot and tests for extra-labels.yaml:
           join_params:
             join_method: token
             token_name: "/etc/teleport-secrets/auth-token"
-          proxy_address: proxy.example.com:3080
+          proxy_server: proxy.example.com:3080
           log:
             severity: INFO
             output: stderr
@@ -166,7 +166,7 @@ matches snapshot for affinity.yaml:
           join_params:
             join_method: token
             token_name: "/etc/teleport-secrets/auth-token"
-          proxy_address: proxy.example.com:3080
+          proxy_server: proxy.example.com:3080
           log:
             severity: INFO
             output: stderr
@@ -204,7 +204,7 @@ matches snapshot for all-v6.yaml:
           join_params:
             join_method: token
             token_name: "/etc/teleport-secrets/auth-token"
-          proxy_address: proxy.example.com:3080
+          proxy_server: proxy.example.com:3080
           log:
             severity: INFO
             output: stderr
@@ -258,7 +258,7 @@ matches snapshot for aws-databases.yaml:
           join_params:
             join_method: token
             token_name: "/etc/teleport-secrets/auth-token"
-          proxy_address: proxy.example.com:3080
+          proxy_server: proxy.example.com:3080
           log:
             severity: INFO
             output: stderr
@@ -308,7 +308,7 @@ matches snapshot for backwards-compatibility.yaml:
           join_params:
             join_method: token
             token_name: "/etc/teleport-secrets/auth-token"
-          proxy_address: proxy.example.com:3080
+          proxy_server: proxy.example.com:3080
           log:
             severity: INFO
             output: stderr
@@ -346,7 +346,7 @@ matches snapshot for ca-pin.yaml:
           join_params:
             join_method: token
             token_name: "/etc/teleport-secrets/auth-token"
-          proxy_address: proxy.example.com:3080
+          proxy_server: proxy.example.com:3080
           ca_pin:
             - sha256:7e12c17c20d9cb504bbcb3f0236be3f446861f1396dcbb44425fe28ec1c108f1
           log:
@@ -386,7 +386,7 @@ matches snapshot for db.yaml:
           join_params:
             join_method: token
             token_name: "/etc/teleport-secrets/auth-token"
-          proxy_address: proxy.example.com:3080
+          proxy_server: proxy.example.com:3080
           log:
             severity: INFO
             output: stderr
@@ -429,7 +429,7 @@ matches snapshot for dynamic-app.yaml:
           join_params:
             join_method: token
             token_name: "/etc/teleport-secrets/auth-token"
-          proxy_address: proxy.example.com:3080
+          proxy_server: proxy.example.com:3080
           log:
             severity: INFO
             output: stderr
@@ -469,7 +469,7 @@ matches snapshot for dynamic-db.yaml:
           join_params:
             join_method: token
             token_name: "/etc/teleport-secrets/auth-token"
-          proxy_address: proxy.example.com:3080
+          proxy_server: proxy.example.com:3080
           log:
             severity: INFO
             output: stderr
@@ -509,7 +509,7 @@ matches snapshot for imagepullsecrets.yaml:
           join_params:
             join_method: token
             token_name: "/etc/teleport-secrets/auth-token"
-          proxy_address: proxy.example.com:3080
+          proxy_server: proxy.example.com:3080
           log:
             severity: INFO
             output: stderr
@@ -547,7 +547,7 @@ matches snapshot for initcontainers.yaml:
           join_params:
             join_method: token
             token_name: "/etc/teleport-secrets/auth-token"
-          proxy_address: proxy.example.com:3080
+          proxy_server: proxy.example.com:3080
           log:
             severity: INFO
             output: stderr
@@ -585,7 +585,7 @@ matches snapshot for log-basic.yaml:
           join_params:
             join_method: token
             token_name: "/etc/teleport-secrets/auth-token"
-          proxy_address: proxy.example.com:3080
+          proxy_server: proxy.example.com:3080
           log:
             severity: INFO
             output: stderr
@@ -623,7 +623,7 @@ matches snapshot for log-extra.yaml:
           join_params:
             join_method: token
             token_name: "/etc/teleport-secrets/auth-token"
-          proxy_address: proxy.example.com:3080
+          proxy_server: proxy.example.com:3080
           log:
             severity: DEBUG
             output: /var/lib/teleport/test.log
@@ -661,7 +661,7 @@ matches snapshot for log-legacy.yaml:
           join_params:
             join_method: token
             token_name: "/etc/teleport-secrets/auth-token"
-          proxy_address: proxy.example.com:3080
+          proxy_server: proxy.example.com:3080
           log:
             severity: DEBUG
             output: stderr
@@ -699,7 +699,7 @@ matches snapshot for node-selector.yaml:
           join_params:
             join_method: token
             token_name: "/etc/teleport-secrets/auth-token"
-          proxy_address: proxy.example.com:3080
+          proxy_server: proxy.example.com:3080
           log:
             severity: INFO
             output: stderr
@@ -737,7 +737,7 @@ matches snapshot for pdb.yaml:
           join_params:
             join_method: token
             token_name: "/etc/teleport-secrets/auth-token"
-          proxy_address: proxy.example.com:3080
+          proxy_server: proxy.example.com:3080
           log:
             severity: DEBUG
             output: /var/lib/teleport/test.log
@@ -775,7 +775,7 @@ matches snapshot for resources.yaml:
           join_params:
             join_method: token
             token_name: "/etc/teleport-secrets/auth-token"
-          proxy_address: proxy.example.com:3080
+          proxy_server: proxy.example.com:3080
           log:
             severity: INFO
             output: stderr
@@ -813,7 +813,7 @@ matches snapshot for stateful.yaml:
           join_params:
             join_method: token
             token_name: "/etc/teleport-secrets/auth-token"
-          proxy_address: proxy.example.com:3080
+          proxy_server: proxy.example.com:3080
           log:
             severity: INFO
             output: stderr
@@ -851,7 +851,7 @@ matches snapshot for tolerations.yaml:
           join_params:
             join_method: token
             token_name: "/etc/teleport-secrets/auth-token"
-          proxy_address: proxy.example.com:3080
+          proxy_server: proxy.example.com:3080
           log:
             severity: INFO
             output: stderr
@@ -889,7 +889,7 @@ matches snapshot for volumes.yaml:
           join_params:
             join_method: token
             token_name: "/etc/teleport-secrets/auth-token"
-          proxy_address: proxy.example.com:3080
+          proxy_server: proxy.example.com:3080
           log:
             severity: INFO
             output: stderr

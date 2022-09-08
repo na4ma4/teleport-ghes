@@ -90,8 +90,8 @@ type Config struct {
 	// JoinMethod is the method the instance will use to join the auth server
 	JoinMethod types.JoinMethod
 
-	// ProxyAddress is the address of the proxy
-	ProxyAddress utils.NetAddr
+	// ProxyServer is the address of the proxy
+	ProxyServer utils.NetAddr
 
 	// Identities is an optional list of pre-generated key pairs
 	// for teleport roles, this is helpful when server is preconfigured

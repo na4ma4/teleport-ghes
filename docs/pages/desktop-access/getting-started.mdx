@@ -466,7 +466,7 @@ windows_desktop_service:
 </Details>
 <Details title="Desktop Service Configuration" min="8.0" scopeOnly={true} scope={"cloud"}>
 For Teleport Cloud, Windows Desktop Service should establish a reverse tunnel to
-the hosted proxy. This requires setting `proxy_address` to your cloud tenant and
+the hosted proxy. This requires setting `proxy_server` to your cloud tenant and
 providing a join token.
 
 First, generate a join token with the following command:
@@ -484,7 +484,7 @@ teleport:
   join_params:
     join_method: token
     token_name: /path/to/token
-  proxy_address: mytenant.teleport.sh # replace with your cloud tenant
+  proxy_server: mytenant.teleport.sh # replace with your cloud tenant
 windows_desktop_service:
   enabled: yes
   ldap:

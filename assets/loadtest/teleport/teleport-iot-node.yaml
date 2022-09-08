@@ -7,7 +7,7 @@ teleport:
       output: json
   storage:
     type: dir
-  proxy_address: ${PROXY_HOST}:3080
+  proxy_server: ${PROXY_HOST}:3080
   join_params:
     join_method: token
     token_name: "node-${NODE_TOKEN}"

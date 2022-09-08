@@ -136,7 +136,7 @@ func TestIntegrations(t *testing.T) {
 	t.Run("MultiplexingTrustedClusters", suite.bind(testMultiplexingTrustedClusters))
 	t.Run("PAM", suite.bind(testPAM))
 	t.Run("PortForwarding", suite.bind(testPortForwarding))
-	t.Run("ProxyAddress", suite.bind(testProxyAddress))
+	t.Run("ProxyServer", suite.bind(testProxyServer))
 	t.Run("ProxyHostKeyCheck", suite.bind(testProxyHostKeyCheck))
 	t.Run("ReverseTunnelCollapse", suite.bind(testReverseTunnelCollapse))
 	t.Run("RotateRollback", suite.bind(testRotateRollback))
@@ -3540,10 +3540,10 @@ func testControlMaster(t *testing.T, suite *integrationTestSuite) {
 	}
 }
 
-// testProxyAddress uses the forwarding proxy to connect to a server that
+// testProxyServer uses the forwarding proxy to connect to a server that
 // presents a host key instead of a certificate in different configurations
 // for the host key checking parameter in services.ClusterConfig.
-func testProxyAddress(t *testing.T, suite *integrationTestSuite) {
+func testProxyServer(t *testing.T, suite *integrationTestSuite) {
 	// Create a Teleport instance with Auth/Proxy.
 	mainConfig := func() *service.Config {
 		tconf := suite.defaultServiceConfig()
@@ -3566,7 +3566,7 @@ func testProxyAddress(t *testing.T, suite *integrationTestSuite) {
 		tconf.Version = libdefaults.TeleportConfigVersionV3
 		tconf.Hostname = Host
 		tconf.SetToken("token")
-		tconf.ProxyAddress = utils.NetAddr{
+		tconf.ProxyServer = utils.NetAddr{
 			AddrNetwork: "tcp",
 			Addr:        main.Web,
 		}

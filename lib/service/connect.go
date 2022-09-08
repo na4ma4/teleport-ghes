@@ -252,7 +252,7 @@ func (process *TeleportProcess) connect(role types.SystemRole, opts ...certOptio
 			}, nil
 		}
 		process.log.Infof("Connecting to the cluster %v with TLS client certificate.", identity.ClusterName)
-		clt, err := process.newClient(process.Config.AuthServerAddresses(), process.Config.ProxyAddress, identity)
+		clt, err := process.newClient(process.Config.AuthServerAddresses(), process.Config.ProxyServer, identity)
 		if err != nil {
 			// In the event that a user is attempting to connect a machine to
 			// a different cluster it will give a cryptic warning about an
@@ -281,7 +281,7 @@ func (process *TeleportProcess) connect(role types.SystemRole, opts ...certOptio
 					ServerIdentity: identity,
 				}, nil
 			}
-			clt, err := process.newClient(process.Config.AuthServerAddresses(), process.Config.ProxyAddress, identity)
+			clt, err := process.newClient(process.Config.AuthServerAddresses(), process.Config.ProxyServer, identity)
 			if err != nil {
 				return nil, trace.Wrap(err)
 			}
@@ -303,7 +303,7 @@ func (process *TeleportProcess) connect(role types.SystemRole, opts ...certOptio
 					ServerIdentity: identity,
 				}, nil
 			}
-			clt, err := process.newClient(process.Config.AuthServerAddresses(), process.Config.ProxyAddress, newIdentity)
+			clt, err := process.newClient(process.Config.AuthServerAddresses(), process.Config.ProxyServer, newIdentity)
 			if err != nil {
 				return nil, trace.Wrap(err)
 			}
@@ -325,7 +325,7 @@ func (process *TeleportProcess) connect(role types.SystemRole, opts ...certOptio
 					ServerIdentity: newIdentity,
 				}, nil
 			}
-			clt, err := process.newClient(process.Config.AuthServerAddresses(), process.Config.ProxyAddress, newIdentity)
+			clt, err := process.newClient(process.Config.AuthServerAddresses(), process.Config.ProxyServer, newIdentity)
 			if err != nil {
 				return nil, trace.Wrap(err)
 			}
@@ -345,7 +345,7 @@ func (process *TeleportProcess) connect(role types.SystemRole, opts ...certOptio
 					ServerIdentity: identity,
 				}, nil
 			}
-			clt, err := process.newClient(process.Config.AuthServerAddresses(), process.Config.ProxyAddress, identity)
+			clt, err := process.newClient(process.Config.AuthServerAddresses(), process.Config.ProxyServer, identity)
 			if err != nil {
 				return nil, trace.Wrap(err)
 			}
@@ -510,7 +510,7 @@ func (process *TeleportProcess) firstTimeConnectWithAssertions(role types.System
 	}
 	process.deleteKeyPair(role, reason)
 
-	clt, err := process.newClient(process.Config.AuthServerAddresses(), process.Config.ProxyAddress, identity)
+	clt, err := process.newClient(process.Config.AuthServerAddresses(), process.Config.ProxyServer, identity)
 	if err != nil {
 		return nil, trace.Wrap(err)
 	}
@@ -629,7 +629,7 @@ func (process *TeleportProcess) firstTimeConnect(role types.SystemRole) (*Connec
 			ServerIdentity: identity,
 		}
 	} else {
-		clt, err := process.newClient(process.Config.AuthServerAddresses(), process.Config.ProxyAddress, identity)
+		clt, err := process.newClient(process.Config.AuthServerAddresses(), process.Config.ProxyServer, identity)
 		if err != nil {
 			return nil, trace.Wrap(err)
 		}

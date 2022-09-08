@@ -83,29 +83,29 @@ func applyDefaults(cfg *Config) {
 
 func validateAuthOrProxyServices(cfg *Config) error {
 	haveAuthServers := len(cfg.authServers) > 0
-	haveProxyAddress := !cfg.ProxyAddress.IsEmpty()
+	haveProxyServer := !cfg.ProxyServer.IsEmpty()
 
 	if cfg.Version == defaults.TeleportConfigVersionV3 {
-		if haveAuthServers && haveProxyAddress {
-			return trace.BadParameter("config: cannot use both auth_server and proxy_address")
+		if haveAuthServers && haveProxyServer {
+			return trace.BadParameter("config: cannot use both auth_server and proxy_server")
 		}
 
-		if !haveAuthServers && !haveProxyAddress {
-			return trace.BadParameter("config: auth_server or proxy_address is required")
+		if !haveAuthServers && !haveProxyServer {
+			return trace.BadParameter("config: auth_server or proxy_server is required")
 		}
 
 		if haveAuthServers && cfg.Apps.Enabled {
-			return trace.BadParameter("config: when app_service is enabled, proxy_address must be specified instead of auth_server")
+			return trace.BadParameter("config: when app_service is enabled, proxy_server must be specified instead of auth_server")
 		}
 
 		if haveAuthServers && cfg.Databases.Enabled {
-			return trace.BadParameter("config: when db_service is enabled, proxy_address must be specified instead of auth_server")
+			return trace.BadParameter("config: when db_service is enabled, proxy_server must be specified instead of auth_server")
 		}
 
-		if haveProxyAddress {
-			port := cfg.ProxyAddress.Port(defaults.HTTPListenPort)
+		if haveProxyServer {
+			port := cfg.ProxyServer.Port(defaults.HTTPListenPort)
 			if port == defaults.AuthListenPort {
-				cfg.Log.Warnf("config: your proxy_address is pointing to port %d, have you specified your auth server instead?", defaults.AuthListenPort)
+				cfg.Log.Warnf("config: your proxy_server is pointing to port %d, have you specified your auth server instead?", defaults.AuthListenPort)
 			}
 		}
 
@@ -122,8 +122,8 @@ func validateAuthOrProxyServices(cfg *Config) error {
 		return nil
 	}
 
-	if haveProxyAddress {
-		return trace.BadParameter("config: proxy_address is supported from config version v3 onwards")
+	if haveProxyServer {
+		return trace.BadParameter("config: proxy_server is supported from config version v3 onwards")
 	}
 
 	if !haveAuthServers {

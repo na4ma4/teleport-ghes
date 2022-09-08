@@ -51,14 +51,14 @@ func TestValidateConfig(t *testing.T) {
 			err: "config: enable at least one of auth_service, ssh_service, proxy_service, app_service, database_service, kubernetes_service or windows_desktop_service",
 		},
 		{
-			desc: "no auth_servers or proxy_address specified",
+			desc: "no auth_servers or proxy_server specified",
 			config: &Config{
 				Version: defaults.TeleportConfigVersionV3,
 				Auth: AuthConfig{
 					Enabled: true,
 				},
 			},
-			err: "config: auth_server or proxy_address is required",
+			err: "config: auth_server or proxy_server is required",
 		},
 		{
 			desc: "no auth_servers specified",
@@ -71,15 +71,15 @@ func TestValidateConfig(t *testing.T) {
 			err: "config: auth_servers is required",
 		},
 		{
-			desc: "specifying proxy_address with the wrong config version",
+			desc: "specifying proxy_server with the wrong config version",
 			config: &Config{
 				Version: defaults.TeleportConfigVersionV2,
 				Auth: AuthConfig{
 					Enabled: true,
 				},
-				ProxyAddress: *utils.MustParseAddr("0.0.0.0"),
+				ProxyServer: *utils.MustParseAddr("0.0.0.0"),
 			},
-			err: "config: proxy_address is supported from config version v3 onwards",
+			err: "config: proxy_server is supported from config version v3 onwards",
 		},
 		{
 			desc: "specifying auth_server when app_service is enabled",
@@ -91,7 +91,7 @@ func TestValidateConfig(t *testing.T) {
 				DataDir:     "/",
 				authServers: []utils.NetAddr{*utils.MustParseAddr("0.0.0.0")},
 			},
-			err: "config: when app_service is enabled, proxy_address must be specified instead of auth_server",
+			err: "config: when app_service is enabled, proxy_server must be specified instead of auth_server",
 		},
 		{
 			desc: "specifying auth_server when db_service is enabled",
@@ -103,7 +103,7 @@ func TestValidateConfig(t *testing.T) {
 				DataDir:     "/",
 				authServers: []utils.NetAddr{*utils.MustParseAddr("0.0.0.0")},
 			},
-			err: "config: when db_service is enabled, proxy_address must be specified instead of auth_server",
+			err: "config: when db_service is enabled, proxy_server must be specified instead of auth_server",
 		},
 	}
 

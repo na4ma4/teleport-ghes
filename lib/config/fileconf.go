@@ -221,7 +221,7 @@ func MakeSampleFileConfig(flags SampleFlags) (fc *FileConfig, err error) {
 	}
 
 	if flags.ProxyAddress != "" {
-		g.ProxyAddress = flags.ProxyAddress
+		g.ProxyServer = flags.ProxyAddress
 	}
 
 	g.CAPin = strings.Split(flags.CAPin, ",")
@@ -572,8 +572,8 @@ type Global struct {
 	// v1, v2
 	AuthServers []string `yaml:"auth_servers,omitempty"`
 	// v3
-	AuthServer   string `yaml:"auth_server,omitempty"`
-	ProxyAddress string `yaml:"proxy_address,omitempty"`
+	AuthServer  string `yaml:"auth_server,omitempty"`
+	ProxyServer string `yaml:"proxy_server,omitempty"`
 
 	Limits      ConnectionLimits `yaml:"connection_limits,omitempty"`
 	Logger      Log              `yaml:"log,omitempty"`
