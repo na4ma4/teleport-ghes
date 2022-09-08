@@ -90,7 +90,9 @@ Save the following configuration file as `/etc/teleport.yaml` on the *auth.examp
 version: v3
 teleport:
   nodename: auth.example.com
-  auth_token: dogs-are-much-nicer-than-cats
+  join_params:
+    join_method: token
+    token_name: dogs-are-much-nicer-than-cats
   auth_server: localhost:3025
 
 proxy_service:
@@ -142,7 +144,9 @@ and use the CA pin you copied as the value of `ca_pin`.
 version: v3
 teleport:
   nodename: node.example.com
-  auth_token: dogs-are-much-nicer-than-cats
+  join_params:
+    join_method: token
+    token_name: dogs-are-much-nicer-than-cats
 
   # Specify your proxy address
   proxy_address: proxy.example.com:3080

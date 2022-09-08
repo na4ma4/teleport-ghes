@@ -140,7 +140,9 @@ teleport:
   data_dir: /var/lib/teleport-app
   # Instructs the service to load the join token from the specified file
   # during initial registration with the cluster.
-  auth_token: /tmp/token
+  join_params:
+    join_method: token
+    token_name: /tmp/token
   # Proxy address to connect to. Note that it has to be the proxy address
   # because the app service always connects to the cluster over a reverse
   # tunnel.

@@ -481,7 +481,9 @@ Service, and then use the following configuration:
 ```yaml
 version: v3
 teleport:
-  auth_token: /path/to/token
+  join_params:
+    join_method: token
+    token_name: /path/to/token
   proxy_address: mytenant.teleport.sh # replace with your cloud tenant
 windows_desktop_service:
   enabled: yes

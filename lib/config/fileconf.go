@@ -567,10 +567,6 @@ type Global struct {
 	DataDir  string `yaml:"data_dir,omitempty"`
 	PIDFile  string `yaml:"pid_file,omitempty"`
 
-	// AuthToken is the old way of configuring the token to be used by the
-	// node to join the Teleport cluster. `JoinParams.TokenName` should be
-	// used instead with `JoinParams.JoinMethod = types.JoinMethodToken`.
-	AuthToken  string     `yaml:"auth_token,omitempty"`
 	JoinParams JoinParams `yaml:"join_params,omitempty"`
 
 	// v1, v2

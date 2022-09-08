@@ -58,7 +58,9 @@ teleport:
   #
   # We recommend to use tools like `pwgen` to generate sufficiently random
   # tokens of 32+ byte length.
-  auth_token: zw6C82kq7VEUSJeSDzuldWsxakql6jrTYmphxRQOlrATTGbLQoaIwEBo48o9
+  join_params:
+    join_method: token
+    token_name: zw6C82kq7VEUSJeSDzuldWsxakql6jrTYmphxRQOlrATTGbLQoaIwEBo48o9
 
 auth_service:
   # enable the auth service:
@@ -94,13 +96,16 @@ Service host:
 ```yaml
 version: v3
 teleport:
-  auth_token: zw6C82kq7VEUSJeSDzuldWsxakql6jrTYmphxRQOlrATTGbLQoaIwEBo48o9
+  join_params:
+    join_method: token
+    token_name: zw6C82kq7VEUSJeSDzuldWsxakql6jrTYmphxRQOlrATTGbLQoaIwEBo48o9
+
   # Specify either the proxy address
   proxy_address: teleport.example.com:3080
   # or the auth server address
   auth_server: 10.1.1.10:3025
 
-  # enable ssh service and disable auth and proxy:
+# Enable ssh service and disable auth and proxy:
 ssh_service:
   enabled: true
 auth_service:

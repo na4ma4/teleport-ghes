@@ -2213,11 +2213,6 @@ func splitRoles(roles string) []string {
 
 // applyTokenConfig applies the auth_token and join_params to the config
 func applyTokenConfig(fc *FileConfig, cfg *service.Config) error {
-	if fc.AuthToken != "" {
-		cfg.JoinMethod = types.JoinMethodToken
-		cfg.SetToken(fc.AuthToken)
-	}
-
 	if fc.JoinParams != (JoinParams{}) {
 		if cfg.HasToken() {
 			return trace.BadParameter("only one of auth_token or join_params should be set")

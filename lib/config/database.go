@@ -42,8 +42,10 @@ version: v3
 teleport:
   nodename: {{ .NodeName }}
   data_dir: {{ .DataDir }}
-  auth_token: {{ .AuthToken }}
   proxy_address: {{ .ProxyAddress }}
+  join_params: 
+    join_method: token
+    token_name: {{ .AuthToken }}
   {{- if .CAPins }}
   ca_pin:
   {{- range .CAPins }}
