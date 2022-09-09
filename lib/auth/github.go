@@ -237,8 +237,8 @@ func newGithubOAuth2Config(connector types.GithubConnector) oauth2.Config {
 		},
 		RedirectURL: connector.GetRedirectURL(),
 		Scope:       GithubScopes,
-		AuthURL:     GithubAuthURL,
-		TokenURL:    GithubTokenURL,
+		AuthURL:     connector.GetAuthURL(),
+		TokenURL:    connector.GetTokenURL(),
 	}
 }
 
@@ -332,6 +332,7 @@ func (a *Server) validateGithubAuthCallback(ctx context.Context, diagCtx *ssoDia
 	claims, err := populateGithubClaims(&githubAPIClient{
 		token:      token.AccessToken,
 		authServer: a,
+		apiURL:     connector.GetAPIURL(),
 	})
 	if err != nil {
 		return nil, trace.Wrap(err, "Failed to query Github API for user claims.")
@@ -588,6 +589,8 @@ type githubAPIClient struct {
 	token string
 	// authServer points to the Auth Server.
 	authServer *Server
+	// apiURL is the Github API URL from the configuration.
+	apiURL string
 }
 
 // userResponse represents response from "user" API call
@@ -599,7 +602,7 @@ type userResponse struct {
 // getEmails retrieves a list of emails for authenticated user
 func (c *githubAPIClient) getUser() (*userResponse, error) {
 	// Ignore pagination links, we should never get more than a single user here.
-	bytes, _, err := c.get("/user")
+	bytes, _, err := c.get("user")
 	if err != nil {
 		return nil, trace.Wrap(err)
 	}
@@ -631,7 +634,7 @@ type orgResponse struct {
 func (c *githubAPIClient) getTeams() ([]teamResponse, error) {
 	var result []teamResponse
 
-	bytes, nextPage, err := c.get("/user/teams")
+	bytes, nextPage, err := c.get("user/teams")
 	if err != nil {
 		return nil, trace.Wrap(err)
 	}
@@ -699,7 +702,7 @@ func (c *githubAPIClient) getTeams() ([]teamResponse, error) {
 
 // get makes a GET request to the provided URL using the client's token for auth
 func (c *githubAPIClient) get(url string) ([]byte, string, error) {
-	request, err := http.NewRequest("GET", fmt.Sprintf("%v%v", GithubAPIURL, url), nil)
+	request, err := http.NewRequest("GET", fmt.Sprintf("%v%v", c.apiURL, url), nil)
 	if err != nil {
 		return nil, "", trace.Wrap(err)
 	}
@@ -726,15 +729,6 @@ func (c *githubAPIClient) get(url string) ([]byte, string, error) {
 }
 
 const (
-	// GithubAuthURL is the Github authorization endpoint
-	GithubAuthURL = "https://github.com/login/oauth/authorize"
-
-	// GithubTokenURL is the Github token exchange endpoint
-	GithubTokenURL = "https://github.com/login/oauth/access_token"
-
-	// GithubAPIURL is the Github base API URL
-	GithubAPIURL = "https://api.github.com"
-
 	// MaxPages is the maximum number of pagination links that will be followed.
 	MaxPages = 99
 )

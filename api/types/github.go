@@ -45,6 +45,18 @@ type GithubConnector interface {
 	GetRedirectURL() string
 	// SetRedirectURL sets the connector redirect URL
 	SetRedirectURL(string)
+	// GetAuthURL returns the connector auth URL
+	GetAuthURL() string
+	// SetAuthURL sets the connector auth URL
+	SetAuthURL(string)
+	// GetTokenURL returns the connector token URL
+	GetTokenURL() string
+	// SetTokenURL sets the connector token URL
+	SetTokenURL(string)
+	// GetAPIURL returns the connector API URL
+	GetAPIURL() string
+	// SetAPIURL sets the connector API URL
+	SetAPIURL(string)
 	// GetTeamsToLogins returns the mapping of Github teams to allowed logins
 	GetTeamsToLogins() []TeamMapping
 	// SetTeamsToLogins sets the mapping of Github teams to allowed logins
@@ -159,6 +171,18 @@ func (c *GithubConnectorV3) CheckAndSetDefaults() error {
 		return trace.Wrap(err)
 	}
 
+	if c.Spec.APIURL == "" {
+		c.Spec.APIURL = defaults.GithubAPIURL
+	}
+
+	if c.Spec.AuthURL == "" {
+		c.Spec.AuthURL = defaults.GithubAuthURL
+	}
+
+	if c.Spec.TokenURL == "" {
+		c.Spec.TokenURL = defaults.GithubTokenURL
+	}
+
 	// DELETE IN 11.0.0
 	if len(c.Spec.TeamsToLogins) > 0 {
 		log.Warn("GitHub connector field teams_to_logins is deprecated and will be removed in the next version. Please use teams_to_roles instead.")
@@ -211,6 +235,36 @@ func (c *GithubConnectorV3) GetRedirectURL() string {
 // SetRedirectURL sets the connector redirect URL
 func (c *GithubConnectorV3) SetRedirectURL(redirectURL string) {
 	c.Spec.RedirectURL = redirectURL
+}
+
+// GetAuthURL returns the connector auth URL
+func (c *GithubConnectorV3) GetAuthURL() string {
+	return c.Spec.AuthURL
+}
+
+// SetAuthURL sets the connector Auth URL
+func (c *GithubConnectorV3) SetAuthURL(authURL string) {
+	c.Spec.AuthURL = authURL
+}
+
+// GetTokenURL returns the connector token URL
+func (c *GithubConnectorV3) GetTokenURL() string {
+	return c.Spec.TokenURL
+}
+
+// SetTokenURL sets the connector Token URL
+func (c *GithubConnectorV3) SetTokenURL(tokenURL string) {
+	c.Spec.TokenURL = tokenURL
+}
+
+// GetAPIURL returns the connector API URL
+func (c *GithubConnectorV3) GetAPIURL() string {
+	return c.Spec.APIURL
+}
+
+// SetAPIURL sets the connector API URL
+func (c *GithubConnectorV3) SetAPIURL(apiURL string) {
+	c.Spec.APIURL = apiURL
 }
 
 // GetTeamsToLogins returns the connector team membership mappings

@@ -75,6 +75,15 @@ const (
 	// BreakerRatioMinExecutions is the minimum number of requests before the ratio tripper
 	// will consider examining the request pass rate
 	BreakerRatioMinExecutions = 10
+
+	// GithubAuthURL is the public Github.com authorization endpoint
+	GithubAuthURL = "https://github.com/login/oauth/authorize"
+
+	// GithubTokenURL is the public Github.com token exchange endpoint
+	GithubTokenURL = "https://github.com/login/oauth/access_token"
+
+	// GithubAPIURL is the public Github.com base API URL
+	GithubAPIURL = "https://api.github.com/"
 )
 
 var (

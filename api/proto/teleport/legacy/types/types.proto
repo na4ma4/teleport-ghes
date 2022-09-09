@@ -3346,6 +3346,12 @@ message GithubConnectorSpecV3 {
     (gogoproto.nullable) = false,
     (gogoproto.jsontag) = "teams_to_roles,omitempty"
   ];
+  // AuthURL is the Github authorization endpoint URL.
+  string AuthURL = 7 [(gogoproto.jsontag) = "auth_url"];
+  // TokenURL is the Github token exchange endpoint URL.
+  string TokenURL = 8 [(gogoproto.jsontag) = "token_url"];
+  // APIURL is the Github base API URL.
+  string APIURL = 9 [(gogoproto.jsontag) = "api_url"];
 }
 
 // GithubAuthRequest is the request to start Github OAuth2 flow.
